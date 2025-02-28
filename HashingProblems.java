@@ -1,5 +1,5 @@
 /*
- * *** YOUR NAME GOES HERE / YOUR SECTION NUMBER ***
+ * *** TUKER MOOSE - COMP 272/400C-002 - Spring 2025 ***
  *
  * This HashingProblems object contains three methods / problems that you must
  * complete utilize the HashMap object within the Java's Collection Framework Library.
@@ -10,10 +10,9 @@
  *  - twoSums
  */
 
-import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
 
 class HashingProblems {
 
@@ -33,6 +32,16 @@ class HashingProblems {
 
     public double getAverage(HashMap<Integer, Integer> map, int[] array) {
 
+        int sum = 0;
+        int count = 0;
+
+        for (int key : array) {
+            if (map.containsKey(key)) {
+                sum += map.get(key);
+                count++;
+            }
+        }
+
         /*
          * ADD YOUR CODE HERE - DO NOT FORGET TO ADD YOU NAME AT TOP OF FILE
          *
@@ -41,7 +50,7 @@ class HashingProblems {
          * returning 0.0/0.0 IS correct (which would return a non-number).
          */
 
-         return 0.0 / 0.0;
+         return count == 0 ? Double.NaN : (double) sum / count;
   }
 
 
@@ -56,12 +65,11 @@ class HashingProblems {
     
       ArrayList<String> result = new ArrayList<>();
 
-      /*
-       * ADD YOUR CODE HERE
-       *
-       * Hint: Consider iterating over the HashMap using the keySet method.
-       */
-
+        for (int key : map.keySet()) {
+            if (key % 2 != 0) { // modulo 2 to find only even numbers
+                result.add(map.get(key));
+            }
+        }
 
       return result;
   }
@@ -106,11 +114,20 @@ class HashingProblems {
 
   public int twoSums(int[] numbers, int k) {
 
-      /*
-       * ADD YOUR CODE HERE
-       */
+    HashSet<Integer> set = new HashSet<>();
+    int count = 0;
 
-      return -1;
+    for (int num : numbers) {
+        if (set.contains(num - k)) {
+            count++;
+        }
+        if (set.contains(num + k)) {
+            count++;
+        }
+        set.add(num);
+    }
+    
+      return count;
   }
 
 } /* end class HashingProblems */
